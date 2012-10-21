@@ -23,20 +23,9 @@ set -e
 cd ${TOPDIR}
 
 #
-# Expand the SPEC file template:
-#
-if [[ -r SPECS/${NAME}-${VERSION}.spec.template ]]
-then
-  /bin/sed -e "s/\${NAME}/${NAME}/g" -e "s/\${VERSION}/${VERSION}/g" -e "s/\${RELEASE}/${RELEASE}/g" < SPECS/${NAME}-${VERSION}.spec.template > SPECS/${NAME}-${VERSION}.spec
-else
-  echo "\"${TOPDIR}/SPECS/${NAME}-${VERSION}.spec.template\" not found."
-  exit 1
-fi
-
-#
 # Build the binary RPM package:
 #
-/usr/bin/rpmbuild --define "_topdir $(pwd)" -bb SPECS/${NAME}-${VERSION}.spec
+/usr/bin/rpmbuild --define "_topdir $(pwd)" --define "name ${NAME}" --define "version ${VERSION}" --define "release ${RELEASE}" -bb SPECS/${NAME}-${VERSION}.spec
 
 exit $?
 
