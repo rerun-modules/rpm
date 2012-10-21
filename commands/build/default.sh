@@ -7,11 +7,11 @@
 #/ variables: NAME RELEASE TOPDIR VERSION
 
 # Read module function library.
-source $RERUN_MODULES/rpm/lib/functions.sh || { echo "Failed loading function library" >&2 ; exit 1 ; }
+source $RERUN_MODULE_DIR/lib/functions.sh || { echo "Failed loading function library" >&2 ; exit 1 ; }
 
 # Parse the command options.
-[ -r $RERUN_MODULES/rpm/commands/build/options.sh ] && {
-  source $RERUN_MODULES/rpm/commands/build/options.sh || exit 2 ;
+[ -r $RERUN_MODULE_DIR/commands/build/options.sh ] && {
+  source $RERUN_MODULE_DIR/commands/build/options.sh || exit 2 ;
 }
 
 # Exit immediately upon non-zero exit. See [set](http://ss64.com/bash/set.html)
@@ -27,7 +27,6 @@ cd ${TOPDIR}
 #
 if [[ -r SPECS/${NAME}-${VERSION}.spec.template ]]
 then
-  /bin/rm -f 
   /bin/sed -e "s/\${NAME}/${NAME}/g" -e "s/\${VERSION}/${VERSION}/g" -e "s/\${RELEASE}/${RELEASE}/g" < SPECS/${NAME}-${VERSION}.spec.template > SPECS/${NAME}-${VERSION}.spec
 else
   echo "\"${TOPDIR}/SPECS/${NAME}-${VERSION}.spec.template\" not found."
