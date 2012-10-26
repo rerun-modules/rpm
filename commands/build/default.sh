@@ -2,7 +2,7 @@
 #
 #/ command: rpm:build: ""Build an RPM using rpmbuild(8) with a conventional directory layout""
 #
-#/ usage: rerun rpm:build [ --arch|-a <noarch>]  --name|-n <>  --release|-r <> [ --topdir|-t </usr/src/rpm>]  --version|-v <> 
+#/ usage: rerun rpm:build [ --arch|-a <noarch>]  --name|-n <> [ --release|-r <1>] [ --topdir|-t </usr/src/rpm>]  --version|-v <> 
 #
 #/ variables: ARCH NAME RELEASE TOPDIR VERSION
 
