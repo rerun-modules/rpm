@@ -25,7 +25,7 @@ cd ${TOPDIR}
 #
 # Build the binary RPM package:
 #
-/usr/bin/rpmbuild --target ${ARCH} --define "_topdir $(pwd)" --define "name ${NAME}" --define "version ${VERSION}" --define "release ${RELEASE}" -bb SPECS/${NAME}-${VERSION}.spec
+/usr/bin/rpmbuild --target ${ARCH} --define "_topdir $(pwd)" --define "name ${NAME}" --define "version ${VERSION}" --define "release ${RELEASE}" -bb SPECS/${NAME}.spec
 
 exit $?
 
