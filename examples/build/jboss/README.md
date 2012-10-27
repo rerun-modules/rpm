@@ -2,7 +2,7 @@
 
 The Rerun rpm module's build command encodes the conventional approach for building a binary package ("-bb") using rpmbuild(8). This example shows how to setup the source base to build a JBoss RPM using the rpm:build command.
 
-Note that the example has been tested using rpmbuild version 4.8.0 (under CentOS 6.2).
+Note that the example has been tested using rpmbuild version 4.8.0 (under CentOS 6.2) and version 4.4.2.3 (under CentOS 5.4).
 
 ## Setting up the source base
 

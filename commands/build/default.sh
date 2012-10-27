@@ -21,11 +21,12 @@ set -e
 # Change to the specified build area:
 #
 cd ${TOPDIR}
+mkdir -p BUILD RPMS
 
 #
 # Build the binary RPM package:
 #
-/usr/bin/rpmbuild --target ${ARCH} --define "_topdir $(pwd)" --define "name ${NAME}" --define "version ${VERSION}" --define "release ${RELEASE}" -bb SPECS/${NAME}.spec
+/usr/bin/rpmbuild --buildroot ${PWD}/BUILDROOT/${NAME}-${VERSION}-${RELEASE}.${ARCH} --target ${ARCH} --define "_topdir $(pwd)" --define "name ${NAME}" --define "version ${VERSION}" --define "release ${RELEASE}" -bb SPECS/${NAME}.spec
 
 exit $?
 
