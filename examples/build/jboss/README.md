@@ -99,7 +99,7 @@ jboss-as is running (pid 44619)
 10:59:27,071 INFO  [org.jboss.as] (Controller Boot Thread) JBAS015951: Admin console listening on http://127.0.0.1:9990
 10:59:27,072 INFO  [org.jboss.as] (Controller Boot Thread) JBAS015874: JBoss AS 7.1.1.Final "Brontes" started in 8586ms - Started 133 of 208 services (74 services are passive or on-demand)
 </pre>
-* JBoss is available at http://localhost:8080 (firewalls allowing!):
+* JBoss is available at http://localhost:8080 and at any other interface enabled on the system (firewalls allowing!):
 <pre>
 [root@centos62-dukesbank-rerun ~]# telnet localhost 8080
 Trying ::1...
@@ -110,3 +110,4 @@ Escape character is '^]'.
 ^]
 telnet> Connection closed.
 </pre>
+* The example sets the admin user's password to "admin123".
