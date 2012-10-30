@@ -52,10 +52,11 @@ cp %{buildroot}/usr/share/jboss-as/bin/init.d/jboss-as.conf %{buildroot}/etc/jbo
 %clean
 
 %files
-# add the files to the RPM with appropriate permissions:
+# add the files to the RPM with appropriate permissions (allowing jboss-as.conf to be modified):
 %defattr(-,jboss-as,jboss-as)
 %attr(755,root,root) /etc/init.d/jboss-as
-/etc/jboss-as
+%dir /etc/jboss-as
+%config %verify(not size md5 mtime) /etc/jboss-as/jboss-as.conf
 /usr/share/jboss-as
  
 %changelog
@@ -75,3 +76,6 @@ fi
 # setup jboss-as as a system service:
 chkconfig --add jboss-as
 chkconfig --level 345 jboss-as on
+
+%preun
+service jboss-as stop
