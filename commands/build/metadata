@@ -3,3 +3,4 @@
 NAME=build
 DESCRIPTION="Build an RPM using rpmbuild(8) with a conventional directory layout"
 
+OPTIONS="arch name release topdir version"
