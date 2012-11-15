@@ -1,0 +1,38 @@
+#!/usr/bin/env bash
+#
+#/ command: rpm:upgrade: "Upgrade an RPM"
+#
+#/ usage: rerun rpm:upgrade  --package-file <> 
+#
+#/ rerun env variables: RERUN, RERUN_VERSION, RERUN_MODULES, RERUN_MODULE_DIR
+#/ option variables: PACKAGE_FILE
+
+# Read module function library.
+. $RERUN_MODULE_DIR/lib/functions.sh || { 
+  echo >&2 "Failed loading function library." ; exit 1 ; 
+}
+
+# Error handling
+# ---------------
+# * Trap calls `rerun_die` with standard message.
+# * Exit upon command errors or accessing unset variables.
+#   * See [set](http://ss64.com/bash/set.html)
+trap 'rerun_die "*** command failed: rpm:upgrade. ***"' ERR
+set -o nounset -o pipefail
+
+# Parse the command options.
+[[ -r $RERUN_MODULE_DIR/commands/upgrade/options.sh ]] && {
+    . $RERUN_MODULE_DIR/commands/upgrade/options.sh || rerun_die "Failed loading options parser."
+    rerun_options_parse "$@"
+}
+
+
+# ------------------------------
+# Your implementation goes here.
+# ------------------------------
+
+sudo rpm --upgrade $PACKAGE_FILE
+
+exit $?
+
+# Done
