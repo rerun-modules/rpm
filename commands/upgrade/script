@@ -31,7 +31,28 @@ set -o nounset -o pipefail
 # Your implementation goes here.
 # ------------------------------
 
-sudo rpm --upgrade $PACKAGE_FILE
+
+#rpm -qp http://mvn-sdp-0.local:8080/job/dtolabs-toolchain-example5-jboss-as-rpm/lastSuccessfulBuild/artifact/jboss-as-rpm/RPMS/noarch/jboss-as-7.1.1.Final-1.noarch.rpm  --qf '%{NAME}-%{VERSION}-%{RELEASE}.%{ARCH}\n'
+
+if ! desiredRpmNameArch=$(rpm -qp $PACKAGE_FILE --qf '%{NAME}.%{ARCH}')
+then
+   rerun_die "package file $PACKAGE_FILE  does not appear to be in rpm format"
+fi
+
+if ! currentRpmVersion=$(rpm -q "${desiredRpmNameArch}" --qf '%{NAME}-%{VERSION}-%{RELEASE}.%{ARCH}' 2>/dev/null)
+then
+   currentRpmVersion=
+fi
+
+desiredRpmVersion=$(rpm -qp $PACKAGE_FILE --qf '%{NAME}-%{VERSION}-%{RELEASE}.%{ARCH}')
+
+if [ "${currentRpmVersion}" != "${desiredRpmVersion}" ]
+then
+   sudo rpm --upgrade $PACKAGE_FILE
+else
+   echo "package ${currentRpmVersion}  is up to date"
+fi
+
 
 exit $?
 
