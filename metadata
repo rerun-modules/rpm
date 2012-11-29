@@ -2,4 +2,5 @@
 # Sun Sep 16 09:59:07 PDT 2012
 NAME=rpm
 DESCRIPTION="Manage the full life-cycle of RPM packages"
-
+VERSION=1.0.1
+REQUIRES=
