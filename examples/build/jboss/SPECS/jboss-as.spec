@@ -74,8 +74,8 @@ fi
 
 %post
 # setup jboss-as as a system service:
-chkconfig --add jboss-as
-chkconfig --level 345 jboss-as on
+/sbin/chkconfig --add jboss-as
+/sbin/chkconfig --level 345 jboss-as on
 
 %preun
-service jboss-as stop
+/sbin/service jboss-as stop
