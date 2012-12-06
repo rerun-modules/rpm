@@ -1,21 +1,67 @@
 #!/usr/bin/env bash
-#
-#/ command: rpm:build: ""Build an RPM using rpmbuild(8) with a conventional directory layout""
-#
+
+# To implement this command, edit the "Command implementation" section below. 
+
+# Usage
+# -----
+
+# Comments prefixed with `#/` are managed by stubbs.
+# The `command` and `usage` comments describe the command
+# and show its options.
+# 
+#/ command: rpm:build: "Build an RPM using rpmbuild(8) with a conventional directory layout"
 #/ usage: rerun rpm:build [ --arch|-a <noarch>]  --name|-n <> [ --release|-r <1>] [ --topdir|-t </usr/src/rpm>]  --version|-v <> 
-#
-#/ variables: ARCH NAME RELEASE TOPDIR VERSION
 
-# Read module function library.
-source $RERUN_MODULE_DIR/lib/functions.sh || { echo "Failed loading function library" >&2 ; exit 1 ; }
+# Load common functions
+# ---------------------
 
-# Parse the command options.
-[ -r $RERUN_MODULE_DIR/commands/build/options.sh ] && {
-  source $RERUN_MODULE_DIR/commands/build/options.sh || exit 2 ;
+# Load the function library for this module.
+# This loads rerun functions, too.
+. $RERUN_MODULE_DIR/lib/functions.sh build || { 
+  echo >&2 "Failed loading function library." ; exit 1 ; 
 }
 
-# Exit immediately upon non-zero exit. See [set](http://ss64.com/bash/set.html)
-set -e
+# Error handling
+# ---------------
+
+# This script is designed to _fail-fast_.
+
+# Trap errors and exit. The call to `rerun_die` will print the
+# the error message and exit with the error command exit status. 
+
+trap 'rerun_die $? "*** command failed: rpm:build. ***"' ERR
+
+# Run [set] `nounset` to treat unset variables as errors. Set [pipefail]
+# so a pipeline return status is the value of the last 
+# (rightmost) command to exit with non-zero status.
+#
+# [set]: http://ss64.com/bash/set.html
+# [pipefail]: http://www.gnu.org/software/bash/manual/html_node/Pipelines.html
+
+set -o nounset -o pipefail
+
+# Command variables
+# -----------------
+
+# This command script can access the following variables
+# declared by `rerun` or by the option parser function.
+
+#/ rerun-variables: RERUN, RERUN_VERSION, RERUN_MODULES, RERUN_MODULE_DIR
+#/ option-variables: ARCH NAME RELEASE TOPDIR VERSION
+
+# The `rerun_options_parse` function processes the command line
+# arguments. Each accepted command line flag results in setting 
+# one the corresponding option variables.
+
+rerun_options_parse "$@"
+
+
+# Command implementation
+# ----------------------
+
+# - - -
+# Put the command implementation here.
+# - - -
 
 #
 # Change to the specified build area:
